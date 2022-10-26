@@ -1,6 +1,6 @@
 # sports_registration
 
-A new Flutter project.
+Mobile application allows users to register various types of sports remotely.
 
 ## Getting Started
 
