@@ -7,6 +7,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   bool showPassword = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,10 +99,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SizedBox(
                 height: 40,
               ),
-              buildTextField("Full Name", "", false),
-              buildTextField("E-mail", "", false),
-              buildTextField("Password", "", true),
-              buildTextField("Mobile Number", "", false),
+              buildTextField("Full Name", "Enter your full name", false),
+              buildTextField("E-mail", "Enter your email", false),
+              buildTextField("Password", "Enter your password", true),
+              buildTextField("Mobile Number", "Enter your mobile number", false),
               SizedBox(
                 height: 35,
               ),
@@ -120,7 +121,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStatePropertyAll<Color>(Colors.green),
+                      MaterialStatePropertyAll<Color>(Colors.green),
                     ),
                     child: Text(
                       "SAVE",
@@ -141,36 +142,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   Widget buildTextField(
       String labelText, String placeholder, bool isPasswordTextField) {
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 35.0),
+
       child: Column(children: [
-        TextField(
+
+
+        TextFormField(
+
+          style:TextStyle(color: Colors.white),
           cursorColor: Colors.black,
           obscureText: isPasswordTextField ? showPassword : false,
           decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide:
-                      BorderSide(color: Colors.lightGreenAccent, width: 3)),
+                  BorderSide(color: Colors.lightGreenAccent, width: 3)),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide:
-                      BorderSide(color: Colors.lightGreenAccent, width: 3)),
-              contentPadding: EdgeInsets.only(bottom: 5),
-              filled: true,
-              fillColor: Colors.white,
+                  BorderSide(color: Colors.lightGreenAccent, width: 3)),
+              contentPadding: EdgeInsets.only(bottom: 5, left:10),
+
               suffixIcon: isPasswordTextField
                   ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.remove_red_eye,
-                        color: Colors.grey,
-                      ),
-                    )
+                onPressed: () {
+                  setState(() {
+                    showPassword = !showPassword;
+                  });
+                },
+                icon: Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.grey,
+                ),
+              )
                   : null,
               labelText: labelText,
               labelStyle: TextStyle(color: Colors.white),
@@ -179,7 +185,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               hintStyle: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.grey,
               )),
         )
       ]),
