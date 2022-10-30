@@ -1,3 +1,4 @@
+import 'package:e7gzly/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:e7gzly/widgets/card_text.dart';
 import 'package:e7gzly/widgets/NavBar.dart';
@@ -8,7 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: NavBar(),
+        drawer: SettingsScreen(),
         backgroundColor: Color(0xFF212121),
         appBar: AppBar(
           backgroundColor: Color(0xFF303030),

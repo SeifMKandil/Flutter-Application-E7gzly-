@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package: lib/widgets/settings_tile.dart';
+import 'package:e7gzly/widgets/settings_tile.dart';
 
 import '../widgets/settings_tile.dart';
 
@@ -30,7 +30,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Colors.blue,
                 icon: Ionicons.person_circle_outline,
                 title: "Account",
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, 'Profile');
+                },
               ),
               const SizedBox(
                 height: 10,
