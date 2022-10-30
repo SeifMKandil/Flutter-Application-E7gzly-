@@ -28,7 +28,7 @@ class Data {
     var FeildName = FieldDetails[0];
     var FeildPrice = FieldDetails[1];
     db.add({
-      'name': element,
+      'name': FeildName,
       'id': 2,
     });
   }
