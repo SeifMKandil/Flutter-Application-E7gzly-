@@ -21,7 +21,7 @@ class _SignInScreenState extends State<SignInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
 
-          // Image.asset('assets/images/logo.png'),
+          //Image.asset('assets/images/logo.png'),
           children: [
             Form(
               key: _formKey,
@@ -92,6 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      Navigator.pushNamed(context, 'Index');
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
                         // If the form is valid, display a snackbar. In the real world,

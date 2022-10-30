@@ -2,6 +2,10 @@ import 'package:e7gzly/screens/DatePicker.dart';
 import 'package:e7gzly/screens/Reservation.dart';
 import 'package:e7gzly/screens/TimePicker.dart';
 import 'package:e7gzly/screens/Test.dart';
+import 'package:e7gzly/screens/home_page.dart';
+import 'package:e7gzly/screens/my_profile_screen.dart';
+import 'package:e7gzly/screens/signin_screen.dart';
+import 'package:e7gzly/screens/signup_screen.dart';
 
 import 'package:e7gzly/widgets/Button.dart';
 import 'package:e7gzly/data/db.dart';
@@ -31,9 +35,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Test(
-        data: Data(),
-      ),
+      home: SignUpScreen(),
 
       /* Resveration(
         name: "Feild 1",
@@ -44,7 +46,9 @@ class MyApp extends StatelessWidget {
         img: "assets/images/Stad.jpg",
       ),*/
       routes: {
-        'Index': (context) => MyStatefulWidget(),
+        'Index': (context) => HomePage(),
+        'Login': (context) => SignInScreen(),
+        'Profile': (context) => EditProfilePage(),
       },
     );
   }

@@ -1,8 +1,9 @@
+import 'package:e7gzly/screens/Reservation.dart';
 import 'package:e7gzly/screens/home_page.dart';
-import 'package:e7gzly/screens/tes.dart';
+import 'package:e7gzly/screens/signup_screen.dart';
+import 'package:e7gzly/widgets/Button.dart';
 import 'package:e7gzly/widgets/NavBar.dart';
 import 'package:flutter/material.dart';
-import 'package:e7gzly/screens/tes.dart';
 
 class CardText extends StatelessWidget {
   final String text;
@@ -23,7 +24,14 @@ class CardText extends StatelessWidget {
         child: InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return const tes();
+          return const Resveration(
+            name: "Feild 1",
+            price: "200",
+            size: "7*8",
+            type: "Natural ",
+            url: "www",
+            img: "assets/images/Stad.jpg",
+          );
         }));
       },
       child: Container(
