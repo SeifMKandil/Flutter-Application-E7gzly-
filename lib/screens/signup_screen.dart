@@ -1,6 +1,8 @@
+import 'package:e7gzly/screens/business_provider_register_screen.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -10,6 +12,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  //  static bool validate(String email,
+  //     [bool allowTopLevelDomains = false, bool allowInternational = true]);
   bool _obsecureText = true;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -29,9 +33,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             },
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: ListView(
+          // alignment: MainAxisAlignment.center,
+          //alignment: CrossAxisAlignment.center,
           children: [
             Form(
               key: _formKey,
@@ -146,8 +150,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'Login');
-
                       if (_formKey.currentState!.validate()) {
                         // If the form is valid, display a snackbar. In the real world,
                         // you'd often call a server or save the information in a database.
@@ -167,7 +169,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Text('Submit'),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return BPRegisterScreen();
+                        }),
+                      );
+                    },
                     style: TextButton.styleFrom(
                       //<-- SEE HERE
                       side: BorderSide(width: 3.0),
