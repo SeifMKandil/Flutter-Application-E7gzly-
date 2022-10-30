@@ -14,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   //  static bool validate(String email,
   //     [bool allowTopLevelDomains = false, bool allowInternational = true]);
+  
   bool _obsecureText = true;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -58,6 +59,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
+                      }
+                      if (EmailValidator.validate(value) == false) {
+                        return 'invalid mail';
                       }
                       return null;
                     },
