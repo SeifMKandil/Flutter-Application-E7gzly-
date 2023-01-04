@@ -1,6 +1,6 @@
-import 'package:e7gzly/screens/Reservation.dart';
-import 'package:e7gzly/screens/home_page.dart';
-import 'package:e7gzly/screens/signup_screen.dart';
+import 'package:e7gzly/views/Reservation.dart';
+import 'package:e7gzly/views/home_page.dart';
+import 'package:e7gzly/views/signup_screen.dart';
 import 'package:e7gzly/widgets/Button.dart';
 import 'package:e7gzly/widgets/NavBar.dart';
 import 'package:flutter/material.dart';

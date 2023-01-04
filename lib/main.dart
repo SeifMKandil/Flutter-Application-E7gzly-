@@ -1,18 +1,22 @@
-import 'package:e7gzly/screens/DatePicker.dart';
-import 'package:e7gzly/screens/Reservation.dart';
-import 'package:e7gzly/screens/TimePicker.dart';
-import 'package:e7gzly/screens/Test.dart';
-import 'package:e7gzly/screens/home_page.dart';
-import 'package:e7gzly/screens/my_profile_screen.dart';
-import 'package:e7gzly/screens/signin_screen.dart';
-import 'package:e7gzly/screens/signup_screen.dart';
+import 'package:e7gzly/views/DatePicker.dart';
+import 'package:e7gzly/views/Reservation.dart';
+import 'package:e7gzly/views/TimePicker.dart';
+import 'package:e7gzly/views/auth.dart';
+
+import 'package:e7gzly/views/home_page.dart';
+import 'package:e7gzly/views/my_profile_screen.dart';
+import 'package:e7gzly/views/signin_screen.dart';
+import 'package:e7gzly/views/signup_screen.dart';
 
 import 'package:e7gzly/widgets/Button.dart';
-import 'package:e7gzly/data/db.dart';
-import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -35,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: SignUpScreen(),
+      home: Auth(),
 
       /* Resveration(
         name: "Feild 1",
