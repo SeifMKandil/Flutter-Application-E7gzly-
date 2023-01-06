@@ -1,6 +1,6 @@
 # e7gzly
 
-A new Flutter project.
+A Flutter project. For sports courts registration.
 
 ## Getting Started
 
