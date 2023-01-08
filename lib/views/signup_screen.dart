@@ -1,4 +1,6 @@
 import 'package:e7gzly/views/business_provider_register_screen.dart';
+import 'package:e7gzly/widgets/Button.dart';
+import 'package:e7gzly/widgets/Text_Widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,9 +19,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //     [bool allowTopLevelDomains = false, bool allowInternational = true]);
 
   final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _phonenumberController = TextEditingController();
   final _confirmpasswordController = TextEditingController();
+  final _addressController = TextEditingController();
 
   Future signUp() async {
     if (passwordsmatch()) {
@@ -73,158 +77,69 @@ class _SignUpScreenState extends State<SignUpScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      labelText: 'Email Address',
-                      hintText: 'Email Address',
-                      prefixIcon: Icon(Icons.email),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 3, color: Color.fromARGB(255, 212, 212, 80)),
-                      ),
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 195, 186, 186),
-                    ),
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      if (EmailValidator.validate(value) == false) {
-                        return 'invalid mail';
-                      }
-                      return null;
-                    },
-                  ),
+                  CustomTextField(
+                      labelText: "Email Address",
+                      keyboardType: TextInputType.emailAddress,
+                      Placeholder: "",
+                      hintText: "Email Address",
+                      prefixIcon: Icon(Icons.email)),
                   SizedBox(
                     height: 30,
                   ),
-                  TextFormField(
-                    controller: _phonenumberController,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      labelText: 'Number',
-                      hintText: ' Number',
-                      prefixIcon: Icon(Icons.phone),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 3, color: Color.fromARGB(255, 212, 212, 80)),
-                      ),
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 195, 186, 186),
-                    ),
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                  ),
+                  CustomTextField(
+                      labelText: "Username",
+                      keyboardType: TextInputType.name,
+                      Placeholder: "",
+                      hintText: "Username",
+                      prefixIcon: Icon(Icons.person)),
                   SizedBox(
                     height: 30,
                   ),
-                  TextFormField(
-                    controller: _passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Password',
-                      prefixIcon: Icon(Icons.password),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _obsecureText = !_obsecureText;
-                          });
-                        },
-                        child: Icon(_obsecureText
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 3, color: Color.fromARGB(255, 212, 212, 80)),
-                      ),
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 195, 186, 186),
-                    ),
-                    obscureText: _obsecureText,
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
-                  ),
+                  CustomTextField(
+                      labelText: "Phone Number",
+                      keyboardType: TextInputType.phone,
+                      Placeholder: "",
+                      hintText: "Phone Number",
+                      prefixIcon: Icon(Icons.phone)),
                   SizedBox(
                     height: 30,
                   ),
-                  TextFormField(
-                    controller: _confirmpasswordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    decoration: InputDecoration(
-                      labelText: 'ConfirmPassword',
-                      hintText: 'ConfirmPassword',
-                      prefixIcon: Icon(Icons.password),
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _obsecureText = !_obsecureText;
-                          });
-                        },
-                        child: Icon(_obsecureText
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 3, color: Color.fromARGB(255, 212, 212, 80)),
-                      ),
-                      filled: true,
-                      fillColor: Color.fromARGB(255, 195, 186, 186),
-                    ),
-                    obscureText: _obsecureText,
-                    onChanged: (String value) {},
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    },
+                  CustomTextField(
+                      labelText: "Address",
+                      keyboardType: TextInputType.text,
+                      Placeholder: "",
+                      hintText: "Address",
+                      prefixIcon: Icon(Icons.location_city)),
+                  SizedBox(
+                    height: 30,
                   ),
+                  CustomPasswordTextField(
+                      labelText: "Password",
+                      Placeholder: "",
+                      isPasswordTextField: true,
+                      hintText: "Password"),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  CustomPasswordTextField(
+                      labelText: "Confirm Password",
+                      Placeholder: "",
+                      isPasswordTextField: true,
+                      hintText: "Confirm Password"),
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    onPressed: signUp,
-                    style: ElevatedButton.styleFrom(
-                      //<-- SEE HERE
-                      backgroundColor: Color.fromARGB(255, 212, 212, 80),
-                      side: BorderSide(
-                        width: 3.0,
-                        color: Color.fromARGB(255, 212, 212, 80),
-                      ),
-                    ),
-                    child: Text('Submit'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return BPRegisterScreen();
-                        }),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      //<-- SEE HERE
-                      side: BorderSide(width: 3.0),
-                    ),
-                    child: Text('Signup as an Admin'),
-                  ),
+                  CustomElevatedButton(inputText: "Submit", onPressed: signUp),
+                  CustomTextButton(
+                      inputText: "Signup as an Admin",
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return BPRegisterScreen();
+                          }),
+                        );
+                      }),
                 ],
               ),
             ),
