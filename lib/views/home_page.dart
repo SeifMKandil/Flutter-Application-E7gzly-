@@ -1,20 +1,19 @@
-import 'package:e7gzly/views/settings_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:e7gzly/widgets/card_text.dart';
-import 'package:e7gzly/widgets/NavBar.dart';
+import 'package:home/NavBarr.dart';
+import 'package:home/card_text.dart';
+import 'package:home/categories_scroll.dart';
+import 'package:home/searchBar.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
-  final user = FirebaseAuth.instance.currentUser!;
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: SettingsScreen(),
-        backgroundColor: Color(0xFF212121),
+        drawer: const NavBarr(),
+        backgroundColor: const Color(0xFF212121),
         appBar: AppBar(
-          backgroundColor: Color(0xFF303030),
+          backgroundColor: const Color(0xFF303030),
           title: Text('7ogozat',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -23,104 +22,61 @@ class HomePage extends StatelessWidget {
         body: SafeArea(
             child: SingleChildScrollView(
                 child: Column(children: <Widget>[
+          const SizedBox(
+            height: 30,
+          ),
+          SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  buildCard(
+                      image: Image.asset("images/foot.jpg", fit: BoxFit.fill),
+                      category: "Football"),
+                  buildCard(
+                      image: Image.asset("images/voley.jpg", fit: BoxFit.fill),
+                      category: "Volleyball"),
+                  buildCard(
+                      image: Image.asset("images/basket.jpg", fit: BoxFit.fill),
+                      category: "Basketball"),
+                  buildCard(
+                      image: Image.asset("images/tennis.jpg", fit: BoxFit.fill),
+                      category: "Tennis"),
+                  buildCard(
+                      image:
+                          Image.asset("images/baskett.jpg", fit: BoxFit.fill),
+                      category: "Basketball"),
+                ],
+              )),
           SizedBox(
             height: 20,
           ),
-          Center(
-            child: Container(
-                child: SizedBox(
-              width: 300,
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(top: 10.0, bottom: 10),
-                  filled: true,
-                  fillColor: Color(0xFFF5F5F5),
-                  hintText: 'Search',
-                  prefixIcon: const Icon(Icons.search),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 1.0,
-                    ),
-                  ),
-                ),
-              ),
-            )),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-
-          //Logout Button
-
-          MaterialButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-            },
-            color: Colors.amber,
-            child: Text(user.email!),
-          ),
-
-          //cardDisplay(),
-          CardText(
-              image: Image.asset("assets/images/1.jpg"),
-              price: "One hour Price: 200",
-              text0: "Football",
-              text: "El Galaa Club"),
-
+          //SearchBar(),
           SizedBox(
             height: 30,
           ),
           CardText(
-              image: Image.asset("assets/images/volloey.jpg"),
-              price: "One hour Price: 300",
-              text0: "Volley",
-              text: "El Wafaa Wel Amal"),
-
-          SizedBox(
-            height: 30,
+            text1: "El Galaa club",
+            text: "Masr El Gedida, Salah Salem",
+            text0: "Football",
+            price: " Price Per Hour: 200 LE",
+            image: Image.asset("images/1.jpg", fit: BoxFit.fill),
           ),
+          const SizedBox(height: 30),
           CardText(
-              image: Image.asset("assets/images/2.jpeg"),
-              price: "One hour Price: 300",
-              text0: "Football",
-              text: "El Haras"),
-
-          SizedBox(
-            height: 30,
+            text1: "El Lycee School",
+            text: "Masr El Gdida, Triumph",
+            text0: "Volleyball",
+            price: " Price Per Hour: 150 LE",
+            image: Image.asset("images/volloey.jpg", fit: BoxFit.fill),
           ),
+          const SizedBox(height: 30),
           CardText(
-              image: Image.asset("assets/images/basketball.jpg"),
-              price: "One hour Price: 300",
-              text0: "Basketball",
-              text: "Wadi Degla"),
+            text1: "El Wafaa Wel Amal",
+            text: "Nasr City, Mostafa El Nahas",
+            text0: "Padel",
+            price: " Price Per Hour: 250 LE",
+            image: Image.asset("images/padel(1).jpg", fit: BoxFit.fill),
+          )
         ]))));
   }
 }
-
-/*void Function(String placeName, int price, int pitchNumber) {
-  Scaffold(
-    body: Center(
-      child: Container(
-        width: 200,
-        height: 200,
-        decoration: BoxDecoration(
-          color: Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.circular(25),
-        ),
-      ),
-    ),
-  );
-}
-
-cardDisplay() {
-  for (var i = 0; i < 10; i++) {
-    var card = CardText(
-        image: Image.asset("assets/images/1.jpg"),
-        price: "One hour price: 200",
-        text0: "padel",
-        text: "El Galaa Club");
-    return card;
-  }
-}*/
