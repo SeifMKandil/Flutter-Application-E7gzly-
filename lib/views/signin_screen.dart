@@ -70,8 +70,8 @@ class SignInScreenState extends State<SignInScreen> {
   void showNotification(){
     flutterLocalNotificationsPlugin.show(
       0,
-      "Testing Notification",
-      "You are on the sign in screen",
+      "E7gzly",
+      "You just clicked the login button!",
       NotificationDetails(
         android: AndroidNotificationDetails(
           channel.id,
