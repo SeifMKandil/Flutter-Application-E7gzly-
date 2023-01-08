@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-class CardText extends StatelessWidget {
+class FieldsCardText extends StatelessWidget {
   final String place;
   final String Field;
   final String price;
+  Future<void> showSchedule(BuildContext context) async {
+    return await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: SfCalendar(
+            view: CalendarView.week,
+            firstDayOfWeek: 6,
+            dataSource: _getCalendarDataSource(),
+          ),
+        );
+      },
+    );
+  }
 
-  const CardText(
+  const FieldsCardText(
       {super.key,
       required this.place,
       required this.Field,
@@ -15,17 +30,16 @@ class CardText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        width: 330,
-        height: 260,
+        width: MediaQuery.of(context).size.width,
+        height: 285,
         decoration: BoxDecoration(
-            color: Color(0xFF212121),
-            borderRadius: BorderRadius.circular(15),
+            color: Color.fromARGB(255, 51, 51, 51),
+            borderRadius: BorderRadius.horizontal(),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 2,
-                offset: Offset(0, 3),
+                color: Color.fromARGB(255, 185, 185, 185).withOpacity(0.5),
+                spreadRadius: 0.5,
+                offset: Offset(0, 0),
               )
             ]),
         //sooooooooooooooooooooooooooooooooooooooooooooora
@@ -46,7 +60,7 @@ class CardText extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 174, 236, 19)),
+                    color: Color.fromARGB(255, 151, 232, 134)),
               ),
               SizedBox(
                 height: 20,
@@ -56,7 +70,7 @@ class CardText extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
-                    color: Color.fromARGB(255, 54, 164, 26),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     fontStyle: FontStyle.italic),
               ),
 
@@ -65,7 +79,7 @@ class CardText extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.normal,
-                    color: Color.fromARGB(255, 132, 120, 16),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     fontStyle: FontStyle.italic),
               ),
 
@@ -83,15 +97,32 @@ class CardText extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(85, 40),
+                  textStyle: TextStyle(fontSize: 18),
+                  backgroundColor: Color.fromARGB(189, 175, 168, 49),
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  showSchedule(context);
+                },
+                child: const Text('Schedule'),
+              ),
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(96, 20, 30, 0),
+                    padding: EdgeInsets.fromLTRB(97, 20, 30, 0),
                   ),
-                  FloatingActionButton(
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(85, 40),
+                      textStyle: TextStyle(fontSize: 18),
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                    ),
                     onPressed: () {},
-                    child: Text('Delete'),
-                    backgroundColor: Color.fromARGB(255, 193, 39, 28),
+                    child: const Text('Delete'),
                   ),
                 ],
               )
@@ -101,4 +132,29 @@ class CardText extends StatelessWidget {
       ),
     );
   }
+}
+
+class DataSource extends CalendarDataSource {
+  DataSource(List<Appointment> source) {
+    appointments = source;
+  }
+}
+
+DataSource _getCalendarDataSource() {
+  List<Appointment> appointments = <Appointment>[];
+  final DateTime today = DateTime.now();
+  final DateTime StartTime =
+      DateTime(today.year, today.month, today.year, today.hour);
+  final DateTime EndTime =
+      DateTime(today.year, today.month, today.year, today.hour - 2);
+  appointments.add(Appointment(
+      startTime: DateTime.now(),
+      endTime: DateTime.now().add(Duration(hours: 2)),
+      isAllDay: false,
+      subject: 'Booked',
+      color: Color.fromARGB(255, 58, 243, 33),
+      startTimeZone: '',
+      endTimeZone: ''));
+
+  return DataSource(appointments);
 }
