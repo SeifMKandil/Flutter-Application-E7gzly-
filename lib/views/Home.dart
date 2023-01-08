@@ -107,7 +107,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             height: 120,
-            child: CardText(
+            child: BusinessCardText(
               Subject: 'Total Earnings ',
               icon: Icons.favorite,
               amount: '600',
@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             height: 120,
-            child: CardText(
+            child: BusinessCardText(
               Subject: 'Total Hours Booked ',
               icon: Icons.favorite,
               amount: '6',
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             height: 120,
-            child: CardText(
+            child: BusinessCardText(
               Subject: 'Most Booked Field ',
               icon: Icons.favorite,
               amount: '1',
