@@ -1,4 +1,4 @@
-name: home
+name: e7gzly
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -37,13 +37,38 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_rating_bar: ^4.0.1
+  ionicons: ^0.2.1
+  email_validator: ^2.1.17
+  cloud_firestore: ^4.3.1
+  firebase_database: ^10.0.9
+  firebase_auth: ^4.2.4
+  get: ^4.6.5
+  google_sign_in: ^5.4.2
+  flutter_signin_button: ^2.0.0
   carousel_slider: ^4.1.1
   table_calendar: ^3.0.8
+  
+  
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
+    sdk: flutter  
+  flutter_launcher_icons: "^0.10.0"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  web:
+    generate: true
+    image_path: "path/to/image.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
+  windows:
+    generate: true
+    image_path: "path/to/image.png"
+    icon_size: 48 # min:48, max:256, default: 48
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -64,17 +89,21 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/1.jpg
-    - images/volloey.jpg
-    - images/padel(1).jpg
-    - images/basket.jpg
-    - images/baskett.jpg
-    - images/foot.jpg
-    - images/tennis.jpg
-    - images/voley.jpg
-    - images/logo.png
+    - assets/images/1.jpg
+    - assets/images/2.jpeg
+    - assets/images/volloey.jpg
+    - assets/images/basketball.jpg
+    - assets/logo.png
+    - assets/images/padel(1).jpg
+    - assets/images/basket.jpg
+    - assets/images/baskett.jpg
+    - assets/images/foot.jpg
+    - assets/images/tennis.jpg
+    - assets/images/voley.jpg
+    
+    
 
-
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

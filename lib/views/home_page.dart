@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:home/NavBarr.dart';
-import 'package:home/card_text.dart';
-import 'package:home/categories_scroll.dart';
-import 'package:home/searchBar.dart';
+
+import '../widgets/NavBarr.dart';
+import '../widgets/card_text.dart';
+import '../widgets/categories_scroll.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -30,20 +30,24 @@ class HomePage extends StatelessWidget {
               child: Row(
                 children: [
                   buildCard(
-                      image: Image.asset("images/foot.jpg", fit: BoxFit.fill),
+                      image: Image.asset("assets/images/foot.jpg",
+                          fit: BoxFit.fill),
                       category: "Football"),
                   buildCard(
-                      image: Image.asset("images/voley.jpg", fit: BoxFit.fill),
+                      image: Image.asset("assets/images/voley.jpg",
+                          fit: BoxFit.fill),
                       category: "Volleyball"),
                   buildCard(
-                      image: Image.asset("images/basket.jpg", fit: BoxFit.fill),
+                      image: Image.asset("assets/images/basket.jpg",
+                          fit: BoxFit.fill),
                       category: "Basketball"),
                   buildCard(
-                      image: Image.asset("images/tennis.jpg", fit: BoxFit.fill),
+                      image: Image.asset("assets/images/tennis.jpg",
+                          fit: BoxFit.fill),
                       category: "Tennis"),
                   buildCard(
-                      image:
-                          Image.asset("images/baskett.jpg", fit: BoxFit.fill),
+                      image: Image.asset("assets/images/baskett.jpg",
+                          fit: BoxFit.fill),
                       category: "Basketball"),
                 ],
               )),
@@ -59,7 +63,7 @@ class HomePage extends StatelessWidget {
             text: "Masr El Gedida, Salah Salem",
             text0: "Football",
             price: " Price Per Hour: 200 LE",
-            image: Image.asset("images/1.jpg", fit: BoxFit.fill),
+            image: Image.asset("assets/images/1.jpg", fit: BoxFit.fill),
           ),
           const SizedBox(height: 30),
           CardText(
@@ -67,7 +71,7 @@ class HomePage extends StatelessWidget {
             text: "Masr El Gdida, Triumph",
             text0: "Volleyball",
             price: " Price Per Hour: 150 LE",
-            image: Image.asset("images/volloey.jpg", fit: BoxFit.fill),
+            image: Image.asset("assets/images/volloey.jpg", fit: BoxFit.fill),
           ),
           const SizedBox(height: 30),
           CardText(
@@ -75,7 +79,7 @@ class HomePage extends StatelessWidget {
             text: "Nasr City, Mostafa El Nahas",
             text0: "Padel",
             price: " Price Per Hour: 250 LE",
-            image: Image.asset("images/padel(1).jpg", fit: BoxFit.fill),
+            image: Image.asset("assets/images/padel(1).jpg", fit: BoxFit.fill),
           )
         ]))));
   }

@@ -1,42 +1,19 @@
+import 'package:e7gzly/view-models/auth_view_model.dart';
+import 'package:e7gzly/views/Sign-upview.dart';
 import 'package:e7gzly/views/signup_screen.dart';
-import 'package:e7gzly/widgets/Text_Widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:e7gzly/widgets/Button.dart';
 import 'package:flutter/material.dart';
-import '../view-models/user_viewmodel.dart';
-import '../widgets/Button.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:get/get.dart';
+import '../widgets/Text_Widget.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class LoginView extends GetWidget<AuthViewModel> {
+  LoginView({super.key});
 
-  @override
-  State<SignInScreen> createState() => SignInScreenState();
-}
-
-class SignInScreenState extends State<SignInScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim());
-
-    Navigator.of(context).pushNamed('/');
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-  }
-
-  bool _obsecureText = true;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
     return Scaffold(
         backgroundColor: Colors.black,
         body: ListView(
@@ -50,28 +27,53 @@ class SignInScreenState extends State<SignInScreen> {
               child: Column(
                 children: [
                   // if (!isKeyboard) Image.asset('assets/images/logo.png'),
-                  Image.asset('assets/images/logo.png'),
+                  Image.asset('assets/logo.png'),
                   SizedBox(
                     height: 30,
                   ),
                   CustomTextField(
-                      labelText: "Username",
-                      keyboardType: TextInputType.name,
-                      Placeholder: "",
-                      hintText: "Username",
-                      prefixIcon: Icon(Icons.person)),
+                    labelText: "Email",
+                    keyboardType: TextInputType.name,
+                    Placeholder: "",
+                    hintText: "Email",
+                    prefixIcon: Icon(Icons.person),
+                    onSave: (value) {
+                      controller.email = value!;
+                    },
+                    validat: (value) {
+                      if (value == null) {
+                        print("Email Must Be Entered");
+                      }
+                    },
+                  ),
+
                   SizedBox(
                     height: 30,
                   ),
                   CustomPasswordTextField(
-                      labelText: "Password",
-                      Placeholder: "",
-                      isPasswordTextField: true,
-                      hintText: "Password"),
+                    labelText: "Password",
+                    Placeholder: "",
+                    isPasswordTextField: true,
+                    hintText: "Password",
+                    onSave: (value) {
+                      controller.password = value!;
+                    },
+                    validat: (value) {
+                      if (value == null) {
+                        print("Password Must Be Entered");
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  CustomElevatedButton(inputText: "Login", onPressed: signIn),
+                  CustomElevatedButton(
+                      inputText: "Login",
+                      onPressed: () {
+                        _formKey.currentState?.save();
+
+                        controller.signInwithEmailAndPassword();
+                      }),
                   CustomTextButton(
                       onPressed: () {}, inputText: "Forgot your password?"),
                   const Text(
@@ -84,19 +86,16 @@ class SignInScreenState extends State<SignInScreen> {
                   ),
                   CustomTextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) {
-                            return SignUpScreen();
-                          }),
-                        );
+                        Get.to(RegisterView());
                       },
                       inputText: "Click here to Signup"),
 
                   SignInButton(
                     Buttons.Google,
                     text: "Sign up with Google",
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.googleSignInMethod();
+                    },
                   ),
 
                   SignInButton(

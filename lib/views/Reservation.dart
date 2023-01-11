@@ -1,8 +1,7 @@
 import 'package:e7gzly/widgets/Button.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Resveration extends StatefulWidget {

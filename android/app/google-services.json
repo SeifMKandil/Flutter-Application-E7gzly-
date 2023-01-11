@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "100143474652-m6ou0l8lcufk6krkej9b1lbngv7dfnso.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eg.edu.miuegypt.csc422.E7gzly",
+            "certificate_hash": "1abd0ddeed4aefbc6ca1db56292ac28cb2a0d482"
+          }
+        },
+        {
           "client_id": "100143474652-5nr5rsegsat39aalpgt5qldojeqoa8gv.apps.googleusercontent.com",
           "client_type": 3
         }

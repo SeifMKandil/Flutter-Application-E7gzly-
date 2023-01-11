@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-Widget buildTextField(
-    String labelText, String Placeholder, bool isPasswordTextField) {
+Widget buildTextField(String labelText, String Placeholder,
+    bool isPasswordTextField, final void Function(String?) onSave) {
   return Padding(
     padding: EdgeInsets.only(bottom: 30),
     child: TextField(
@@ -32,12 +31,16 @@ class CustomPasswordTextField extends StatelessWidget {
   final String Placeholder;
   final bool isPasswordTextField;
   final String hintText;
+  final void Function(String?) onSave;
+  final FormFieldValidator validat;
 
   const CustomPasswordTextField(
       {required this.labelText,
       required this.Placeholder,
       required this.isPasswordTextField,
-      required this.hintText});
+      required this.hintText,
+      required this.onSave,
+      required this.validat});
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +64,8 @@ class CustomPasswordTextField extends StatelessWidget {
       ),
       obscureText: isPasswordTextField,
       onChanged: (String value) {},
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter some text';
-        }
-        return null;
-      },
+      validator: validat,
+      onSaved: onSave,
     );
   }
 }
@@ -77,13 +76,17 @@ class CustomTextField extends StatelessWidget {
   final Icon prefixIcon;
   final TextInputType keyboardType;
   final String hintText;
+  final void Function(String?) onSave;
+  final FormFieldValidator validat;
 
   const CustomTextField(
       {required this.labelText,
       required this.keyboardType,
       required this.Placeholder,
       required this.hintText,
-      required this.prefixIcon});
+      required this.prefixIcon,
+      required this.onSave,
+      required this.validat});
 
   @override
   Widget build(BuildContext context) {
@@ -104,13 +107,9 @@ class CustomTextField extends StatelessWidget {
         filled: true,
         fillColor: Color.fromARGB(255, 243, 236, 236),
       ),
+      onSaved: onSave,
+      validator: validat,
       onChanged: (String value) {},
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter some text';
-        }
-        return null;
-      },
     );
   }
 }
