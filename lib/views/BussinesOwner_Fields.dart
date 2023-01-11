@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sports_registration/widgets/BussinessOwner_Display_Fields_Cards.dart';
+import '../widgets/BussinessOwner_Display_Fields_Cards.dart';
 
 class MyFields extends StatelessWidget {
   const MyFields({Key? key}) : super(key: key);

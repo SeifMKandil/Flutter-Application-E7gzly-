@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sports_registration/widgets/BussinessOwner_Navigation_Drawer.dart';
-import 'package:sports_registration/widgets/BussinessOwner_Insights_Cards.dart';
+import '../widgets/BussinessOwner_Navigation_Drawer.dart';
+import '../widgets/BussinessOwner_Insights_Cards.dart';
 
 /*void main() {
   runApp(const MaterialApp(

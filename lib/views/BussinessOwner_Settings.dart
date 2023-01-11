@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sports_registration/widgets/Text_Widget.dart';
+import '../widgets/BussinessOwner_Settings_Text_Widget.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
