@@ -47,11 +47,8 @@ class AuthViewModel extends GetxController {
 
   void signInwithEmailAndPassword() async {
     try {
-      await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
-        print("Login Sh8al");
-      });
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.offAll(HomePage());
     } on FirebaseAuthException catch (e) {
       Get.snackbar("Error while creating account", e.message.toString(),
           colorText: Color(15), snackPosition: SnackPosition.BOTTOM);
