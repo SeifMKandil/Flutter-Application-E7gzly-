@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sports_registration/Pages/Add_New_Field.dart';
-import 'package:sports_registration/Pages/BussinesOwner_Fields.dart';
-import 'package:sports_registration/Pages/BussinessOwner_Settings.dart';
-import 'package:sports_registration/widgets/drawer_item.dart';
+import '../views/Add_New_Field.dart';
+import '../views/BussinesOwner_Fields.dart';
+import '../views/BussinessOwner_Settings.dart';
+import '../widgets/BussinessOwner_Drawer_Item.dart';
 
 class NavigationDraw extends StatelessWidget {
   const NavigationDraw({Key? key}) : super(key: key);
