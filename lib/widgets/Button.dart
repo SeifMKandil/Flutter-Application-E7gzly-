@@ -1,8 +1,4 @@
-import 'package:flutter/animation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Button extends StatelessWidget {
   final String button_name;
@@ -35,6 +31,93 @@ class Button extends StatelessWidget {
           onPrimary: Colors.amber,
         ),
       ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  final String inputText;
+
+  const CustomButton({required this.inputText});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {},
+      style: TextButton.styleFrom(
+        //<-- SEE HERE
+        side: BorderSide(width: 3.0),
+      ),
+      child: Text(inputText),
+    );
+  }
+}
+
+class CustomElevatedButton extends StatelessWidget {
+  final String inputText;
+  final VoidCallback onPressed;
+  const CustomElevatedButton(
+      {required this.inputText, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        //<-- SEE HERE
+        backgroundColor: Colors.amber,
+        side: BorderSide(
+          width: 3.0,
+          color: Colors.amber,
+        ),
+      ),
+      child: Text(inputText),
+    );
+  }
+}
+
+class ElevatedButtonIcon extends StatelessWidget {
+  final String inputText;
+  final VoidCallback onPressed;
+  final Button prefixButton;
+  const ElevatedButtonIcon(
+      {required this.inputText,
+      required this.onPressed,
+      required this.prefixButton});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: ElevatedButton.icon(
+          onPressed: onPressed, icon: prefixButton, label: Text(inputText)),
+      style: ElevatedButton.styleFrom(
+        //<-- SEE HERE
+
+        backgroundColor: Colors.amber,
+        side: BorderSide(
+          width: 3.0,
+          color: Colors.amber,
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTextButton extends StatelessWidget {
+  final String inputText;
+  final VoidCallback onPressed;
+  const CustomTextButton({required this.inputText, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onPressed,
+      style: TextButton.styleFrom(
+        //<-- SEE HERE
+        side: BorderSide(width: 3.0),
+      ),
+      child: Text(inputText),
     );
   }
 }
