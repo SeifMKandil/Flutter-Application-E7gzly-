@@ -1,10 +1,17 @@
+import 'package:e7gzly/views/login_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class NavBarr extends StatelessWidget {
+  // FirebaseAuth _auth = FirebaseAuth.instance;
   const NavBarr({super.key});
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth _auth = FirebaseAuth.instance;
+
     return Drawer(
       child: ListView(
         children: [
@@ -37,7 +44,10 @@ class NavBarr extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.exit_to_app),
             title: Text('Log out'),
-            onTap: () => null,
+            onTap: () {
+              _auth.signOut();
+              Get.offAll(LoginView());
+            },
           ),
         ],
       ),
