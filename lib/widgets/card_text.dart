@@ -22,9 +22,8 @@ class CardText extends StatelessWidget {
     return Center(
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            return const Calendar(); //page fadya batest beha
-          }));
+          Get.to(Calendar()); //page fadya batest beha
+        };
         },
         child: Container(
           width: 300,
