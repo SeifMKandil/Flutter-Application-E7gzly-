@@ -24,7 +24,7 @@ class CardText extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Get.to(Calendar()); //page fadya batest beha
-        };
+        
         },
         child: Container(
           width: 300,
