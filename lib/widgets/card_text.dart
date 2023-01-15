@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:home/calendar.dart';
+import 'package:get/get.dart';
+import '../views/calendar.dart';
 
 class CardText extends StatelessWidget {
   final String text;
