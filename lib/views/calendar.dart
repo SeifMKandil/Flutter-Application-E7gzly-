@@ -59,6 +59,7 @@ class _CalendarState extends State<Calendar> {
             //selectedDecoration: BoxDecoration(),
           ),
         )),
+        SizedBox(height:80),
         Slot_Button(),
       ],
     );
