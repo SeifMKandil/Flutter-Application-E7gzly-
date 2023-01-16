@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sports_registration/widgets/Fields_Cards.dart';
+import '../widgets/BussinessOwner_Display_Fields_Cards.dart';
 
 class MyFields extends StatelessWidget {
   const MyFields({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class MyFields extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              CardText(
+              FieldsCardText(
                 Field: '1',
                 price: '200',
                 place: 'nasr city',
@@ -29,7 +29,7 @@ class MyFields extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              CardText(
+              FieldsCardText(
                 Field: '5',
                 place: 'new cairo',
                 price: '300',
@@ -37,7 +37,7 @@ class MyFields extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              CardText(
+              FieldsCardText(
                 Field: '6',
                 place: 'shubra',
                 price: '100',

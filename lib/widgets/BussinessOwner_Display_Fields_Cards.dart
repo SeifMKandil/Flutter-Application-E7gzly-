@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class FieldsCardText extends StatelessWidget {
   final String place;
   final String Field;
   final String price;
-  Future<void> showSchedule(BuildContext context) async {
-    return await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          content: SfCalendar(
-            view: CalendarView.week,
-            firstDayOfWeek: 6,
-            dataSource: _getCalendarDataSource(),
-          ),
-        );
-      },
-    );
-  }
 
   const FieldsCardText(
       {super.key,
@@ -97,18 +82,7 @@ class FieldsCardText extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size(85, 40),
-                  textStyle: TextStyle(fontSize: 18),
-                  backgroundColor: Color.fromARGB(189, 175, 168, 49),
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () async {
-                  showSchedule(context);
-                },
-                child: const Text('Schedule'),
-              ),
+
               Row(
                 children: [
                   Padding(
@@ -132,29 +106,4 @@ class FieldsCardText extends StatelessWidget {
       ),
     );
   }
-}
-
-class DataSource extends CalendarDataSource {
-  DataSource(List<Appointment> source) {
-    appointments = source;
-  }
-}
-
-DataSource _getCalendarDataSource() {
-  List<Appointment> appointments = <Appointment>[];
-  final DateTime today = DateTime.now();
-  final DateTime StartTime =
-      DateTime(today.year, today.month, today.year, today.hour);
-  final DateTime EndTime =
-      DateTime(today.year, today.month, today.year, today.hour - 2);
-  appointments.add(Appointment(
-      startTime: DateTime.now(),
-      endTime: DateTime.now().add(Duration(hours: 2)),
-      isAllDay: false,
-      subject: 'Booked',
-      color: Color.fromARGB(255, 58, 243, 33),
-      startTimeZone: '',
-      endTimeZone: ''));
-
-  return DataSource(appointments);
 }

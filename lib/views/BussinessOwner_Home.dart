@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sports_registration/widgets/Navigation_Drawer.dart';
-import 'package:sports_registration/widgets/Admin_Cards.dart';
+import '../widgets/BussinessOwner_Navigation_Drawer.dart';
+import '../widgets/BussinessOwner_Insights_Cards.dart';
+
+/*void main() {
+  runApp(const MaterialApp(
+    home: Home(),
+  ));
+}*/
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -107,7 +113,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             height: 120,
-            child: BusinessCardText(
+            child: BusinessOwnerCardText(
               Subject: 'Total Earnings ',
               icon: Icons.favorite,
               amount: '600',
@@ -115,7 +121,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             height: 120,
-            child: BusinessCardText(
+            child: BusinessOwnerCardText(
               Subject: 'Total Hours Booked ',
               icon: Icons.favorite,
               amount: '6',
@@ -123,7 +129,7 @@ class _HomeState extends State<Home> {
           ),
           Container(
             height: 120,
-            child: BusinessCardText(
+            child: BusinessOwnerCardText(
               Subject: 'Most Booked Field ',
               icon: Icons.favorite,
               amount: '1',

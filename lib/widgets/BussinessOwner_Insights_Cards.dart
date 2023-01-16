@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class BusinessCardText extends StatelessWidget {
+class BusinessOwnerCardText extends StatelessWidget {
   final IconData icon;
   final String Subject;
   final String amount;
 
-  const BusinessCardText({
+  const BusinessOwnerCardText({
     super.key,
     required this.icon,
     required this.Subject,

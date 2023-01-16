@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:home/slot_button.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../widgets/slot_button.dart';
 
 class Calendar extends StatefulWidget {
   const Calendar({super.key});
