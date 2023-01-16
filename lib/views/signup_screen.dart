@@ -37,6 +37,21 @@ class RegisterView extends GetWidget<AuthViewModel> {
               child: Column(
                 children: [
                   CustomTextField(
+                    labelText: "Full Name",
+                    keyboardType: TextInputType.emailAddress,
+                    Placeholder: "",
+                    hintText: "Full Name",
+                    prefixIcon: Icon(Icons.email),
+                    onSave: (value) {
+                      controller.name = value!;
+                    },
+                    validat: (value) {
+                      if (value == null) {
+                        print("EMail Must Be Entered");
+                      }
+                    },
+                  ),
+                  CustomTextField(
                     labelText: "Email Address",
                     keyboardType: TextInputType.emailAddress,
                     Placeholder: "",
