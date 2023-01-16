@@ -49,7 +49,7 @@ class CardText extends StatelessWidget {
               Container(
                 width: 270,
                 height: 150,
-                child: image,
+                child: Image.network(image),
               ),
               //teeeeeeeeeeeeeeeeexxxxxxxxxxxxxxtttttttt
               const SizedBox(
