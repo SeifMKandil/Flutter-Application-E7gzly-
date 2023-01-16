@@ -8,7 +8,7 @@ class CardText extends StatelessWidget {
   final String text1;
   final String text0;
   final String price;
-  final Image image;
+  final String image;
 
   const CardText(
       {super.key,
