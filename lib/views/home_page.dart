@@ -27,7 +27,9 @@ class HomePage extends StatelessWidget {
 ///////////////////////////////////////////////////////////////////////////////////
               //SearchBar(),
               SizedBox(
-                height: 30,
+
+                height: 20,
+
               ),
               Container(
                 height: MediaQuery.of(context).size.height * .67,
@@ -64,7 +66,9 @@ class HomePage extends StatelessWidget {
   _listViewCategory() {
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-        height: 100,
+
+        height: 125,
+
         child: ListView.separated(
           itemCount: controller.categoryModel.length,
           scrollDirection: Axis.horizontal,
@@ -72,12 +76,18 @@ class HomePage extends StatelessWidget {
             return Column(
               children: [
                 Container(
-                  height: 60,
+
+                  height: 90,
                   width: 120,
-                  child: Image.network(controller.categoryModel[index].image),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(controller.categoryModel[index].image,
+                        fit: BoxFit.fill),
+                  ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 15,
+
                 ),
                 Text(
                   controller.categoryModel[index].name,
@@ -87,7 +97,9 @@ class HomePage extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) => SizedBox(
-            width: 5,
+
+            width: 10,
+
           ),
         ),
       ),

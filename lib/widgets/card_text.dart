@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:get/get.dart';
+
 import '../views/calendar.dart';
 
 class CardText extends StatelessWidget {
@@ -49,7 +51,9 @@ class CardText extends StatelessWidget {
               Container(
                 width: 270,
                 height: 150,
-                child: Image.network(image),
+
+                child: Image.network(image, fit: BoxFit.fill),
+
               ),
               //teeeeeeeeeeeeeeeeexxxxxxxxxxxxxxtttttttt
               const SizedBox(
@@ -128,7 +132,7 @@ class CardText extends StatelessWidget {
                 Align(
                     alignment: Alignment.bottomLeft,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 11),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
                         price,
                         style: const TextStyle(
