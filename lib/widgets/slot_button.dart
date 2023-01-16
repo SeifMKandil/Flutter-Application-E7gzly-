@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
+import 'package:e7gzly/external_apis/payment_screen.dart';
 import 'package:flutter/material.dart';
+
 
 class Slot_Button extends StatefulWidget {
   //final double slot;
@@ -38,29 +40,18 @@ class _Slot_ButtonState extends State<Slot_Button> {
                           fontSize: 15,
                           fontStyle: FontStyle.normal),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => PaymentScreen()),
+                      );
+                    },
                   ),
                 ))
           ],
         ]),
       ),
-      Container(
-        width: 800,
-        height: 320,
-        padding: EdgeInsets.fromLTRB(0, 250, 0, 0),
-        child: ElevatedButton(
-          child: Text("Confirm"),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.bold),
-          ),
-          onPressed: () {},
-        ),
-      ),
+
     ]);
   }
 
