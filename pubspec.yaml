@@ -48,6 +48,8 @@ dependencies:
   carousel_slider: ^4.1.1
   table_calendar: ^3.0.8
   shared_preferences: ^2.0.16
+  flutter_stripe: ^4.0.0
+  http:
   
   
 
