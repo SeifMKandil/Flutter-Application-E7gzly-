@@ -47,6 +47,7 @@ dependencies:
   flutter_signin_button: ^2.0.0
   carousel_slider: ^4.1.1
   table_calendar: ^3.0.8
+  shared_preferences: ^2.0.16
   
   
 
