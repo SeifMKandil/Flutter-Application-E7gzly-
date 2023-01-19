@@ -12,6 +12,19 @@ class HomeViewModel extends GetxController {
   List<FeildDetailsModel> get feildDetailsModel => _feildDetailsModel;
   List<FeildDetailsModel> _feildDetailsModel = [];
 
+  FeildDetailsModel? fieldDetails = null;
+
+setFieldDetails(FeildDetailsModel fieldDet) {
+  fieldDetails = fieldDet;
+
+}
+
+  getFieldDetails() {
+    return fieldDetails;
+
+  }
+
+
   final CollectionReference _categoryCollection =
       FirebaseFirestore.instance.collection('Category');
 
