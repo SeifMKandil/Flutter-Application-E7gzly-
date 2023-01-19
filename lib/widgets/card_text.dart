@@ -1,6 +1,7 @@
+import 'package:e7gzly/models/feild_details_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
+import 'package:e7gzly/view-models/home_view_model.dart';
 import 'package:get/get.dart';
 
 import '../views/calendar.dart';
@@ -22,9 +23,15 @@ class CardText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return GetBuilder<HomeViewModel>(
+        builder: (controller) => Center(
       child: InkWell(
         onTap: () {
+
+           FeildDetailsModel fieldDetails = FeildDetailsModel(name: text, price: price, image: image, location: text1);
+            controller.setFieldDetails(fieldDetails);
+
+
           Get.to(Calendar()); //page fadya batest beha
         
         },
@@ -146,6 +153,7 @@ class CardText extends StatelessWidget {
           ),
         ),
       ),
-    );
+        ));
+
   }
 }
