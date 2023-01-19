@@ -1,9 +1,13 @@
 import 'dart:convert';
+import 'package:e7gzly/view-models/profile_view_model.dart';
+import 'package:e7gzly/view-models/home_view_model.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'CONSTANTS.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 
 class PaymentScreen extends StatefulWidget {
@@ -19,35 +23,45 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF212121),
-      appBar: AppBar(
+     return GetBuilder<ProfileViewModel>(
+       init: ProfileViewModel(),
+      builder: (profileController) =>
+          GetBuilder(
+         init : HomeViewModel(),
+            builder: (fieldController) =>
+               Scaffold(
         backgroundColor: const Color(0xFF212121),
-        title: const Text('Payment and Details'),
-      ),
-      body: Column(
+        appBar: AppBar(
+              backgroundColor: const Color(0xFF212121),
+              title: Text("Payment and Details"),
+        ),
+        body: Column(
 
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-          Text("Location: Placeholder", style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic,color: Colors.white),),
-      SizedBox(height: 10),
-      Text("Time Slot: Placeholder", style: TextStyle(fontSize: 30, color: Colors.white),),
-      SizedBox(height: 10),
-      Text("Price: 100 EGP", style: TextStyle(fontSize: 30, color: Colors.white),),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.green,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.green,
-          ),
-          child: Text("Pay Now!"),
-          onPressed: ()async{
-            await makePayment();
-          },
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                Text("Location: Placeholder", style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic,color: Colors.white),),
+        SizedBox(height: 10),
+        Text("Time Slot: Placeholder", style: TextStyle(fontSize: 30, color: Colors.white),),
+        SizedBox(height: 10),
+        Text("Price: 100 EGP", style: TextStyle(fontSize: 30, color: Colors.white),),
+              ],
+        ),
+        bottomNavigationBar: Container(
+              color: Colors.green,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                ),
+                child: Text("Pay Now!"),
+                onPressed: ()async{
+                 await  makePayment();
+                  await createReservation(profileController.userModel.email!, "1","1",fieldController.getFieldDetails().location!);
+
+                },
+              ),
         ),
       ),
+          ),
     );
   }
 
@@ -67,6 +81,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
       ///now finally display payment sheeet
       displayPaymentSheet();
+
     } catch (e, s) {
       print('exception:$e$s');
     }
@@ -91,7 +106,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                 ],
               ),
-            ));
+            ),
+        );
         // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntent = null;
@@ -112,6 +128,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
       print('$e');
     }
   }
+
+
 
   //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
@@ -140,8 +158,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   calculateAmount(String amount) {
-    final calculatedAmout = (int.parse(amount)) * 100 ;
-    return calculatedAmout.toString();
+    final calculatedAmount = (int.parse(amount)) * 100 ;
+    return calculatedAmount.toString();
   }
+
+  createReservation(String reservedBy, String day, String time, String fieldName) async {
+    final docReservation = FirebaseFirestore.instance.collection("Reservations").doc();
+
+    final json = {
+      'timeSlot' : time,
+      'fieldName' : fieldName,
+      'day' : day,
+      'reservedBy' : reservedBy,
+
+    };
+
+     await docReservation.set(json);
+  }
+
+
+
 
 }
