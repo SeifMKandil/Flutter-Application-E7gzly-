@@ -1,8 +1,8 @@
 import 'package:e7gzly/models/user_model.dart';
 import 'package:e7gzly/views/control_view.dart';
 import 'package:e7gzly/views/home_page.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/animation.dart';
 
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -19,8 +19,14 @@ class AuthViewModel extends GetxController {
   final LocalStorageData localStorageData = Get.find();
 
   Rxn<User> _user = Rxn<User>();
+  String? get user {
+    try {
+      _user.value!.email;
+    } catch (e) {
+      print("Value B NULL");
+    }
+  }
 
-  String? get user => _user.value!.email;
   @override
   void onInit() {
     super.onInit();
@@ -44,16 +50,16 @@ class AuthViewModel extends GetxController {
         email: user.user?.email,
         name: user.user?.displayName,
         pic: '',
-        number: null,
+        number: 011,
       ));
       setUser(UserModel(
         userId: user.user?.uid,
         email: user.user?.email,
         name: user.user?.displayName,
         pic: '',
-        number: null,
+        number: 011,
       ));
-      Get.offAll(ControlView());
+      Get.offAll(HomePage());
     });
   }
 
@@ -63,17 +69,13 @@ class AuthViewModel extends GetxController {
           .signInWithEmailAndPassword(
               email: email.trim(), password: password.trim())
           .then((value) async {
-        try {
-          await FireStoreUser().getCurrentUser(value.user!.uid).then((value) =>
-              {
-                setUser(
-                    UserModel.fromJson(value.data() as Map<dynamic, dynamic>))
-              });
-        } catch (e) {
-          print(e);
-        }
+        await FireStoreUser().getCurrentUser(value.user!.uid).then((value) => {
+              setUser(UserModel.fromJson(value.data() as Map<dynamic, dynamic>))
+            });
       });
-      Get.offAll(ControlView());
+      print(email);
+      print(password);
+      Get.offAll(() => HomePage());
     } catch (e) {
       print(password);
     }
