@@ -3,9 +3,12 @@ import 'package:e7gzly/view-models/profile_view_model.dart';
 import 'package:e7gzly/view-models/home_view_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
+import '../main.dart';
 import 'CONSTANTS.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/get.dart';
@@ -82,8 +85,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
           .initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
               paymentIntentClientSecret: paymentIntent!['client_secret'],
-              // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-              // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
               style: ThemeMode.dark,
               merchantDisplayName: 'Adnan'))
           .then((value) {});
@@ -97,7 +98,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   displayPaymentSheet() async {
     try {
+
       await Stripe.instance.presentPaymentSheet().then((value) {
+        showNotification();
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
@@ -123,6 +126,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
       });
+
     } on StripeException catch (e) {
       print('Error is:---> $e');
       showDialog(
@@ -137,6 +141,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
+
     try {
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),
@@ -154,7 +159,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
       );
       // ignore: avoid_print
       print('Payment Intent Body->>> ${response.body.toString()}');
+
       return jsonDecode(response.body);
+
+
     } catch (err) {
       // ignore: avoid_print
       print('err charging user: ${err.toString()}');
@@ -180,4 +188,28 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
     await docReservation.set(json);
   }
+
+  void showNotification(){
+    flutterLocalNotificationsPlugin.show(
+        0,
+        '',
+        'Your reservation has been placed!',
+        NotificationDetails(
+            android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                importance: Importance.high,
+                color: Colors.blue,
+                playSound: true,
+                icon: 'mipmap/ic_launcher'
+            )
+        )
+
+    );
+  }
+
+
+
+
+
 }
