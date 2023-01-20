@@ -1,7 +1,10 @@
 import 'package:e7gzly/view-models/home_view_model.dart';
+import 'package:e7gzly/views/my_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:e7gzly/views/field_details_view.dart';
 
+import '../models/feild_details_model.dart';
 import '../widgets/NavBarr.dart';
 import '../widgets/card_text.dart';
 
@@ -27,9 +30,7 @@ class HomePage extends StatelessWidget {
 ///////////////////////////////////////////////////////////////////////////////////
               //SearchBar(),
               SizedBox(
-
                 height: 20,
-
               ),
               Container(
                 height: MediaQuery.of(context).size.height * .67,
@@ -41,12 +42,30 @@ class HomePage extends StatelessWidget {
                       itemCount: controller.feildDetailsModel.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return CardText(
-                            text: controller.feildDetailsModel[index].location,
-                            text1: controller.feildDetailsModel[index].name,
-                            price: controller.feildDetailsModel[index].price,
-                            image: controller.feildDetailsModel[index].image,
-                            text0: "s");
+                        return GestureDetector(
+                          onTap: () {
+                            FeildDetailsModel fieldDetails = FeildDetailsModel(
+                                name: controller
+                                    .feildDetailsModel[index].location,
+                                price:
+                                    controller.feildDetailsModel[index].price,
+                                image:
+                                    controller.feildDetailsModel[index].image,
+                                location:
+                                    controller.feildDetailsModel[index].name);
+                            controller.setFieldDetails(fieldDetails);
+
+                            Get.to(FieldDetailsView(
+                                model: controller.feildDetailsModel[index]));
+                          },
+                          child: CardText(
+                              text:
+                                  controller.feildDetailsModel[index].location,
+                              text1: controller.feildDetailsModel[index].name,
+                              price: controller.feildDetailsModel[index].price,
+                              image: controller.feildDetailsModel[index].image,
+                              text0: "s"),
+                        );
                       },
                       separatorBuilder: (context, index) => SizedBox(
                         height: 20,
@@ -66,9 +85,7 @@ class HomePage extends StatelessWidget {
   _listViewCategory() {
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-
         height: 125,
-
         child: ListView.separated(
           itemCount: controller.categoryModel.length,
           scrollDirection: Axis.horizontal,
@@ -76,7 +93,6 @@ class HomePage extends StatelessWidget {
             return Column(
               children: [
                 Container(
-
                   height: 90,
                   width: 120,
                   child: ClipRRect(
@@ -87,7 +103,6 @@ class HomePage extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 15,
-
                 ),
                 Text(
                   controller.categoryModel[index].name,
@@ -97,9 +112,7 @@ class HomePage extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) => SizedBox(
-
             width: 10,
-
           ),
         ),
       ),
