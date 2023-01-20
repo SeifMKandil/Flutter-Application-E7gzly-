@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e7gzly/view-models/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -8,7 +9,77 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  final CollectionReference _Users =
+      FirebaseFirestore.instance.collection('Users');
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
   bool showPassword = false;
+
+  Future<void> _update([DocumentSnapshot? documentSnapshot]) async {
+    if (documentSnapshot != null) {
+      _nameController.text = documentSnapshot['name'];
+      _emailController.text = documentSnapshot['email'];
+      _numberController.text = documentSnapshot['number'].toString()
+        ..replaceAll(".0", "");
+    }
+
+    await showModalBottomSheet(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext ctx) {
+          return Padding(
+            padding: EdgeInsets.only(
+                top: 20,
+                left: 20,
+                right: 20,
+                bottom: MediaQuery.of(ctx).viewInsets.bottom + 20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(labelText: 'name'),
+                ),
+                TextField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'email',
+                  ),
+                ),
+                TextField(
+                  controller: _numberController,
+                  decoration: const InputDecoration(
+                    labelText: 'number',
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  child: const Text('Update'),
+                  onPressed: () async {
+                    final String name = _nameController.text;
+                    final String email = _emailController.text;
+                    final double? number =
+                        double.tryParse(_numberController.text);
+                    if (number != null) {
+                      await _Users.doc(documentSnapshot!.id).update(
+                          {"name": name, "email": email, "number": number});
+                      _nameController.text = '';
+                      _emailController.text = '';
+                      _numberController.text = '';
+                      Navigator.of(context).pop();
+                    }
+                  },
+                )
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileViewModel>(
@@ -116,8 +187,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     OutlinedButton(
-                      onPressed: () {},
-                      child: Text("CANCEL",
+                      onPressed: () => _update(),
+                      child: Text("update",
                           style: TextStyle(
                               fontSize: 14,
                               letterSpacing: 2.2,

@@ -19,11 +19,11 @@ class NavBarr extends StatelessWidget {
       builder: (controller) => Drawer(
         child: ListView(
           children: [
-            Image.asset("images/logo.png"),
+            Image.asset("assets/logo.png"),
             ListTile(
               leading: const Icon(Icons.account_circle),
               title: Text('My profile'),
-              onTap: () => Get.to(EditProfilePage()),
+              onTap: () => Get.to(profile()),
             ),
             ListTile(
               leading: Icon(Icons.notification_important),

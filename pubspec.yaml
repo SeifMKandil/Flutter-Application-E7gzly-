@@ -53,6 +53,10 @@ dependencies:
   firebase_messaging: ^14.2.1
   flutter_local_notifications: ^13.0.0
   http:
+  firebase_storage: ^11.0.10
+  image_picker: ^0.8.6
+  firebase_core: ^2.4.1
+  permission_handler: ^10.2.0
 
   
   
