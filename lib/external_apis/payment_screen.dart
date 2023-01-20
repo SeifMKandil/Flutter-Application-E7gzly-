@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'CONSTANTS.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-
+import 'package:get/get.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -18,118 +18,122 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-
   Map<String, dynamic>? paymentIntent;
 
   @override
   Widget build(BuildContext context) {
-     return GetBuilder<ProfileViewModel>(
-       init: ProfileViewModel(),
-      builder: (profileController) =>
-          GetBuilder(
-         init : HomeViewModel(),
-            builder: (fieldController) =>
-               Scaffold(
-        backgroundColor: const Color(0xFF212121),
-        appBar: AppBar(
-              backgroundColor: const Color(0xFF212121),
-              title: Text("Payment and Details"),
-        ),
-        body: Column(
-
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                Text("Location: Placeholder", style: TextStyle(fontSize: 30, fontStyle: FontStyle.italic,color: Colors.white),),
-        SizedBox(height: 10),
-        Text("Time Slot: Placeholder", style: TextStyle(fontSize: 30, color: Colors.white),),
-        SizedBox(height: 10),
-        Text("Price: 100 EGP", style: TextStyle(fontSize: 30, color: Colors.white),),
-              ],
-        ),
-        bottomNavigationBar: Container(
-              color: Colors.green,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                ),
-                child: Text("Pay Now!"),
-                onPressed: ()async{
-                 await  makePayment();
-                  await createReservation(profileController.userModel.email!, "1","1",fieldController.getFieldDetails().location!);
-
-                },
+    return GetBuilder<ProfileViewModel>(
+      init: ProfileViewModel(),
+      builder: (profileController) => GetBuilder(
+        init: HomeViewModel(),
+        builder: (fieldController) => Scaffold(
+          backgroundColor: const Color(0xFF212121),
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF212121),
+            title: Text("Payment and Details"),
+          ),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "Location: " + Get.arguments['location'].toString(),
+                style: TextStyle(
+                    fontSize: 30,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.white),
               ),
+              SizedBox(height: 10),
+              Text(
+                "Time Slot: " + Get.arguments['time'],
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Price: " + Get.arguments['price'] + " EGP",
+                style: TextStyle(fontSize: 30, color: Colors.white),
+              ),
+            ],
+          ),
+          bottomNavigationBar: Container(
+            color: Colors.green,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              child: Text("Pay Now!"),
+              onPressed: () async {
+                await makePayment();
+                await createReservation(profileController.userModel.email!, "1",
+                    "1", fieldController.getFieldDetails().location!);
+              },
+            ),
+          ),
         ),
       ),
-          ),
     );
   }
 
   Future<void> makePayment() async {
     try {
-      paymentIntent = await createPaymentIntent('100', 'EGP');
+      paymentIntent =
+          await createPaymentIntent(Get.arguments['price'].toString(), 'EGP');
       //Payment Sheet
-      await Stripe.instance.initPaymentSheet(
-          paymentSheetParameters: SetupPaymentSheetParameters(
-              paymentIntentClientSecret: paymentIntent!['client_secret'],
-              // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-              // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
-              style: ThemeMode.dark,
-              merchantDisplayName: 'Adnan')).then((value){
-      });
-
+      await Stripe.instance
+          .initPaymentSheet(
+              paymentSheetParameters: SetupPaymentSheetParameters(
+                  paymentIntentClientSecret: paymentIntent!['client_secret'],
+                  // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
+                  // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
+                  style: ThemeMode.dark,
+                  merchantDisplayName: 'Adnan'))
+          .then((value) {});
 
       ///now finally display payment sheeet
       displayPaymentSheet();
-
     } catch (e, s) {
       print('exception:$e$s');
     }
   }
 
   displayPaymentSheet() async {
-
     try {
-      await Stripe.instance.presentPaymentSheet(
-      ).then((value){
+      await Stripe.instance.presentPaymentSheet().then((value) {
         showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: const [
-                      Icon(Icons.check_circle, color: Colors.green,),
-                      Text("Payment Successful"),
-                    ],
-                  ),
-                ],
-              ),
+          context: context,
+          builder: (_) => AlertDialog(
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: const [
+                    Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                    ),
+                    Text("Payment Successful"),
+                  ],
+                ),
+              ],
             ),
+          ),
         );
         // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntent = null;
-
-      }).onError((error, stackTrace){
+      }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
       });
-
-
     } on StripeException catch (e) {
       print('Error is:---> $e');
       showDialog(
           context: context,
           builder: (_) => const AlertDialog(
-            content: Text("Cancelled "),
-          ));
+                content: Text("Cancelled "),
+              ));
     } catch (e) {
       print('$e');
     }
   }
-
-
 
   //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
@@ -158,25 +162,22 @@ class _PaymentScreenState extends State<PaymentScreen> {
   }
 
   calculateAmount(String amount) {
-    final calculatedAmount = (int.parse(amount)) * 100 ;
+    final calculatedAmount = (int.parse(amount)) * 100;
     return calculatedAmount.toString();
   }
 
-  createReservation(String reservedBy, String day, String time, String fieldName) async {
-    final docReservation = FirebaseFirestore.instance.collection("Reservations").doc();
+  createReservation(
+      String reservedBy, String day, String time, String fieldName) async {
+    final docReservation =
+        FirebaseFirestore.instance.collection("Reservations").doc();
 
     final json = {
-      'timeSlot' : time,
-      'fieldName' : fieldName,
-      'day' : day,
-      'reservedBy' : reservedBy,
-
+      'timeSlot': time,
+      'fieldName': fieldName,
+      'day': day,
+      'reservedBy': reservedBy,
     };
 
-     await docReservation.set(json);
+    await docReservation.set(json);
   }
-
-
-
-
 }
