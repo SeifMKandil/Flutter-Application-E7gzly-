@@ -1,4 +1,9 @@
+import 'package:e7gzly/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../views/BussinessOwner_Home.dart';
 
 class FieldsCardText extends StatelessWidget {
   final String place;
@@ -16,7 +21,7 @@ class FieldsCardText extends StatelessWidget {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.3,
+        height: 285,
         decoration: BoxDecoration(
             color: Color.fromARGB(255, 51, 51, 51),
             borderRadius: BorderRadius.horizontal(),
@@ -27,6 +32,7 @@ class FieldsCardText extends StatelessWidget {
                 offset: Offset(0, 0),
               )
             ]),
+        //sooooooooooooooooooooooooooooooooooooooooooooora
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -34,6 +40,8 @@ class FieldsCardText extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
+
+              //teeeeeeeeeeeeeeeeexxxxxxxxxxxxxxtttttttt
               SizedBox(
                 height: 5,
               ),
@@ -45,7 +53,7 @@ class FieldsCardText extends StatelessWidget {
                     color: Color.fromARGB(255, 151, 232, 134)),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
+                height: 20,
               ),
               Text(
                 "Place : " + place,
@@ -55,9 +63,7 @@ class FieldsCardText extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontStyle: FontStyle.italic),
               ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
+
               Text(
                 "Field Number : " + Field,
                 style: TextStyle(
@@ -66,8 +72,9 @@ class FieldsCardText extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontStyle: FontStyle.italic),
               ),
+
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
+                height: 10,
               ),
               Text(
                 "Price per hour : " + price,
@@ -78,16 +85,13 @@ class FieldsCardText extends StatelessWidget {
                     fontStyle: FontStyle.italic),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
+                height: 10,
               ),
+
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        MediaQuery.of(context).size.width * 0.3,
-                        MediaQuery.of(context).size.height * 0.01,
-                        30,
-                        0),
+                    padding: EdgeInsets.fromLTRB(97, 20, 30, 0),
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -96,7 +100,10 @@ class FieldsCardText extends StatelessWidget {
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      deleteField(name: Field);
+                      Get.to(Home());
+                    },
                     child: const Text('Delete'),
                   ),
                 ],
