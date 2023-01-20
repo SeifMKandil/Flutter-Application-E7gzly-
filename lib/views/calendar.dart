@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../external_apis/payment_screen.dart';
 import '../widgets/slot_button.dart';
 
 class Calendar extends StatefulWidget {
@@ -59,8 +61,46 @@ class _CalendarState extends State<Calendar> {
             //selectedDecoration: BoxDecoration(),
           ),
         )),
-        SizedBox(height:80),
-        Slot_Button(),
+        SizedBox(height: 80),
+        Stack(children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(children: [
+              SizedBox(
+                width: 20,
+                height: 200,
+              ),
+              for (int x = 1, y = 2; x <= 11; x++, y++) ...[
+                if (y > 12) ...[],
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                    child: SizedBox(
+                      width: 130,
+                      height: 50,
+                      child: ElevatedButton(
+                        child: Text("$x pm - $y pm"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontStyle: FontStyle.normal),
+                        ),
+                        onPressed: () {
+                          Get.to(PaymentScreen(), arguments: {
+                            'time': "$x pm - $y pm",
+                            'day': today,
+                            'name': Get.arguments['name'],
+                            'price': Get.arguments['price'],
+                            'location': Get.arguments['location'],
+                          });
+                        },
+                      ),
+                    ))
+              ],
+            ]),
+          ),
+        ]),
       ],
     );
   }
