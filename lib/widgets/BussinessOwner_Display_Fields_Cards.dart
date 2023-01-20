@@ -16,7 +16,7 @@ class FieldsCardText extends StatelessWidget {
     return Center(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 285,
+        height: MediaQuery.of(context).size.height * 0.3,
         decoration: BoxDecoration(
             color: Color.fromARGB(255, 51, 51, 51),
             borderRadius: BorderRadius.horizontal(),
@@ -27,7 +27,6 @@ class FieldsCardText extends StatelessWidget {
                 offset: Offset(0, 0),
               )
             ]),
-        //sooooooooooooooooooooooooooooooooooooooooooooora
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -35,8 +34,6 @@ class FieldsCardText extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-
-              //teeeeeeeeeeeeeeeeexxxxxxxxxxxxxxtttttttt
               SizedBox(
                 height: 5,
               ),
@@ -48,7 +45,7 @@ class FieldsCardText extends StatelessWidget {
                     color: Color.fromARGB(255, 151, 232, 134)),
               ),
               SizedBox(
-                height: 20,
+                height: MediaQuery.of(context).size.height * 0.01,
               ),
               Text(
                 "Place : " + place,
@@ -58,7 +55,9 @@ class FieldsCardText extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontStyle: FontStyle.italic),
               ),
-
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
               Text(
                 "Field Number : " + Field,
                 style: TextStyle(
@@ -67,9 +66,8 @@ class FieldsCardText extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontStyle: FontStyle.italic),
               ),
-
               SizedBox(
-                height: 10,
+                height: MediaQuery.of(context).size.height * 0.01,
               ),
               Text(
                 "Price per hour : " + price,
@@ -80,13 +78,16 @@ class FieldsCardText extends StatelessWidget {
                     fontStyle: FontStyle.italic),
               ),
               SizedBox(
-                height: 10,
+                height: MediaQuery.of(context).size.height * 0.01,
               ),
-
               Row(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(97, 20, 30, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        MediaQuery.of(context).size.width * 0.3,
+                        MediaQuery.of(context).size.height * 0.01,
+                        30,
+                        0),
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(

@@ -1,4 +1,6 @@
+import 'package:e7gzly/views/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../views/Add_New_Field.dart';
 import '../views/BussinesOwner_Fields.dart';
 import '../views/BussinessOwner_Settings.dart';
@@ -37,7 +39,9 @@ class NavigationDraw extends StatelessWidget {
                 foregroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 232, 25, 25)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Get.to(LoginView());
+              },
               child: Text('SignOut'),
             )
           ]),
@@ -65,7 +69,6 @@ class NavigationDraw extends StatelessWidget {
   }
 
   Widget headerWidget() {
-    const url = 'C:/Users/Dell/Downloads/app.png';
     return Row(
       children: [
         const SizedBox(
@@ -74,7 +77,7 @@ class NavigationDraw extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('Bussiness Owner Name',
+            Text('Ali Ahmed Saad',
                 style: TextStyle(fontSize: 14, color: Colors.white)),
             SizedBox(
               height: 10,
