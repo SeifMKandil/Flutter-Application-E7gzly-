@@ -1,4 +1,6 @@
 import 'package:e7gzly/view-models/auth_view_model.dart';
+import 'package:e7gzly/views/BussinessOwner_Home.dart';
+import 'package:e7gzly/views/BussinessOwner_Login.dart';
 import 'package:e7gzly/views/Sign-upview.dart';
 import 'package:e7gzly/views/signup_screen.dart';
 import 'package:e7gzly/widgets/Button.dart';
@@ -84,6 +86,11 @@ class LoginView extends GetWidget<AuthViewModel> {
                       decoration: TextDecoration.underline, // <-- SEE HERE
                     ),
                   ),
+                  CustomTextButton(
+                      onPressed: () {
+                        Get.to(OwnerLogin());
+                      },
+                      inputText: "Login As Owner"),
                   CustomTextButton(
                       onPressed: () {
                         Get.to(RegisterView());

@@ -16,7 +16,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> items = ['1', '2', '3', '4', '5'];
+  List<String> items = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12'
+  ];
   String? Selected = '1';
   @override
   Widget build(BuildContext context) {
@@ -53,29 +66,6 @@ class _HomeState extends State<Home> {
                     child: Container(
                       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                       height: 36,
-                      child: Center(
-                        child: DropdownButton<String>(
-                          value: Selected,
-                          icon: const Icon(Icons.arrow_downward),
-                          elevation: 10,
-                          style: const TextStyle(color: Colors.white),
-                          underline: Container(
-                            height: 1,
-                            color: Colors.white,
-                          ),
-                          items: items
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.black),
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (item) => setState(() => Selected = item),
-                        ),
-                      ),
                     ),
                   ),
                   Center(
@@ -115,7 +105,7 @@ class _HomeState extends State<Home> {
             height: 120,
             child: BusinessOwnerCardText(
               Subject: 'Total Earnings ',
-              icon: Icons.favorite,
+              icon: Icons.money_sharp,
               amount: '600',
             ),
           ),
@@ -123,7 +113,7 @@ class _HomeState extends State<Home> {
             height: 120,
             child: BusinessOwnerCardText(
               Subject: 'Total Hours Booked ',
-              icon: Icons.favorite,
+              icon: Icons.timelapse,
               amount: '6',
             ),
           ),
@@ -131,7 +121,7 @@ class _HomeState extends State<Home> {
             height: 120,
             child: BusinessOwnerCardText(
               Subject: 'Most Booked Field ',
-              icon: Icons.favorite,
+              icon: Icons.favorite_border,
               amount: '1',
             ),
           )
