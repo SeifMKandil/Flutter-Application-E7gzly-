@@ -41,7 +41,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -95,6 +95,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:17.0.0'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore:24.2.2'
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.multidex:multidex:2.0.1'
 }
 
