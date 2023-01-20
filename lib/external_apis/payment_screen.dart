@@ -36,7 +36,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Location: " + Get.arguments['location'].toString(),
+                "Field: " + Get.arguments['location'].toString(),
                 style: TextStyle(
                     fontSize: 30,
                     fontStyle: FontStyle.italic,
@@ -63,8 +63,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: Text("Pay Now!"),
               onPressed: () async {
                 await makePayment();
-                await createReservation(profileController.userModel.email!, "1",
-                    "1", fieldController.getFieldDetails().location!);
+                await createReservation(profileController.userModel.email!, Get.arguments['day'].toString(),
+                    Get.arguments['time'].toString(), fieldController.getFieldDetails().location!);
               },
             ),
           ),
@@ -76,16 +76,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Future<void> makePayment() async {
     try {
       paymentIntent =
-          await createPaymentIntent(Get.arguments['price'].toString(), 'EGP');
+      await createPaymentIntent(Get.arguments['price'].toString(), 'EGP');
       //Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-                  // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
-                  style: ThemeMode.dark,
-                  merchantDisplayName: 'Adnan'))
+          paymentSheetParameters: SetupPaymentSheetParameters(
+              paymentIntentClientSecret: paymentIntent!['client_secret'],
+              // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
+              // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
+              style: ThemeMode.dark,
+              merchantDisplayName: 'Adnan'))
           .then((value) {});
 
       ///now finally display payment sheeet
@@ -128,8 +128,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
       showDialog(
           context: context,
           builder: (_) => const AlertDialog(
-                content: Text("Cancelled "),
-              ));
+            content: Text("Cancelled "),
+          ));
     } catch (e) {
       print('$e');
     }
@@ -169,7 +169,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   createReservation(
       String reservedBy, String day, String time, String fieldName) async {
     final docReservation =
-        FirebaseFirestore.instance.collection("Reservations").doc();
+    FirebaseFirestore.instance.collection("Reservations").doc();
 
     final json = {
       'timeSlot': time,
