@@ -1,6 +1,5 @@
-import 'package:e7gzly/views/login_view.dart';
+import 'package:e7gzly/views/businessOwner_Reservations.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../views/Add_New_Field.dart';
 import '../views/BussinesOwner_Fields.dart';
 import '../views/BussinessOwner_Settings.dart';
@@ -34,14 +33,16 @@ class NavigationDraw extends StatelessWidget {
               name: 'Account Settings',
               onPressed: () => onItemPressed(context, index: 2),
             ),
+            DrawerItem(
+              name: 'My Reservations',
+              onPressed: () => onItemPressed(context, index: 3),
+            ),
             TextButton(
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 232, 25, 25)),
               ),
-              onPressed: () {
-                Get.to(LoginView());
-              },
+              onPressed: () {},
               child: Text('SignOut'),
             )
           ]),
@@ -55,20 +56,25 @@ class NavigationDraw extends StatelessWidget {
     switch (index) {
       case 0:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const MyFields()));
+            context, MaterialPageRoute(builder: (context) => MyFields()));
         break;
       case 1:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const NewField()));
+            context, MaterialPageRoute(builder: (context) => NewField()));
         break;
       case 2:
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Settings()));
+            context, MaterialPageRoute(builder: (context) => Settings()));
+        break;
+      case 3:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => myReservations()));
         break;
     }
   }
 
   Widget headerWidget() {
+    const url = 'C:/Users/Dell/Downloads/app.png';
     return Row(
       children: [
         const SizedBox(
@@ -77,7 +83,7 @@ class NavigationDraw extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            Text('Ali Ahmed Saad',
+            Text('Bussiness Owner Name',
                 style: TextStyle(fontSize: 14, color: Colors.white)),
             SizedBox(
               height: 10,

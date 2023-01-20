@@ -1,4 +1,9 @@
+import 'package:e7gzly/views/BussinessOwner_Home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import '../view-models/field_view_model.dart';
+import '../services/user_service.dart';
 
 class NewField extends StatefulWidget {
   const NewField({Key? key}) : super(key: key);
@@ -10,6 +15,10 @@ class NewField extends StatefulWidget {
 class _NewFieldState extends State<NewField> {
   final formKey = GlobalKey<FormState>(); //key for form
   String name = "";
+  TextEditingController fieldName = TextEditingController();
+  TextEditingController fieldPrice = TextEditingController();
+  TextEditingController fieldLocation = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -47,6 +56,7 @@ class _NewFieldState extends State<NewField> {
                         height: height * 0.05,
                       ),
                       TextFormField(
+                        controller: fieldName,
                         cursorColor: Color.fromARGB(255, 15, 106, 15),
                         decoration: InputDecoration(
                             hintText: "Field Name/Number ",
@@ -65,6 +75,7 @@ class _NewFieldState extends State<NewField> {
                         height: height * 0.05,
                       ),
                       TextFormField(
+                        controller: fieldLocation,
                         cursorColor: Color.fromARGB(255, 15, 106, 15),
                         decoration: InputDecoration(
                             hintText: "Field Location ",
@@ -83,24 +94,7 @@ class _NewFieldState extends State<NewField> {
                         height: height * 0.05,
                       ),
                       TextFormField(
-                        cursorColor: Color.fromARGB(255, 15, 106, 15),
-                        decoration: InputDecoration(
-                            hintText: "Field Sport ",
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 15, 106, 15)))),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter field Sport";
-                          } else {
-                            return null;
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: height * 0.05,
-                      ),
-                      TextFormField(
+                        controller: fieldPrice,
                         cursorColor: Color.fromARGB(255, 15, 106, 15),
                         decoration: InputDecoration(
                             hintText: "Field Price per Hour ",
@@ -127,7 +121,13 @@ class _NewFieldState extends State<NewField> {
                               );
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar);
+
+                              createField(
+                                  name: fieldName.text,
+                                  price: fieldPrice.text,
+                                  location: fieldLocation.text);
                             }
+                            Get.to(Home());
                           }),
                           child: Text('Save'),
                           style: OutlinedButton.styleFrom(

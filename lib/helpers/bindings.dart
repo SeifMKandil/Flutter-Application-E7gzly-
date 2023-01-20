@@ -11,5 +11,7 @@ class Binding extends Bindings {
 
     Get.lazyPut(() => HomeViewModel());
     Get.lazyPut(() => LocalStorageData());
+    Get.lazyPut(() => ReservationsViewModel());
+    Get.lazyPut(() => FieldViewModel());
   }
 }
