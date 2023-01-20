@@ -1,8 +1,11 @@
 import 'package:e7gzly/views/businessOwner_Reservations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../views/Add_New_Field.dart';
 import '../views/BussinesOwner_Fields.dart';
 import '../views/BussinessOwner_Settings.dart';
+import '../views/login_view.dart';
 import '../widgets/BussinessOwner_Drawer_Item.dart';
 
 class NavigationDraw extends StatelessWidget {
@@ -42,7 +45,10 @@ class NavigationDraw extends StatelessWidget {
                 foregroundColor: MaterialStateProperty.all<Color>(
                     Color.fromARGB(255, 232, 25, 25)),
               ),
-              onPressed: () {},
+              onPressed: () {
+              Get.offAll(LoginView());
+              
+              },
               child: Text('SignOut'),
             )
           ]),
