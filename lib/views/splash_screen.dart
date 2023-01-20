@@ -26,15 +26,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
-        child: Container(
-          child: Image.asset('assets/images/logo.png'),
-          //Text('Splash Screen',
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: 24,
-          //       fontWeight: FontWeight.bold,
-          //  )),
-        ),
+        child: Container(child: Image.asset('assets/logo.png')),
       ),
     );
   }
