@@ -1,6 +1,7 @@
 import 'package:e7gzly/view-models/auth_view_model.dart';
 import 'package:e7gzly/views/login_view.dart';
 import 'package:e7gzly/views/my_profile_screen.dart';
+import 'package:e7gzly/views/profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
