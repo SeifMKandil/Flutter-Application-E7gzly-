@@ -51,6 +51,9 @@ class RegisterView extends GetWidget<AuthViewModel> {
                       }
                     },
                   ),
+                  SizedBox(
+                    height: 30,
+                  ),
                   CustomTextField(
                     labelText: "Email Address",
                     keyboardType: TextInputType.emailAddress,
@@ -107,24 +110,25 @@ class RegisterView extends GetWidget<AuthViewModel> {
                     },
                     validat: (value) {
                       if (value == null) {
-                        print("Password Must Be Entered");
+                        ;
                       }
                     },
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  SizedBox(
-                    height: 20,
+                  Container(
+                    width: 150,
+                    height: 40,
+                    child: CustomElevatedButton(
+                        inputText: "Submit",
+                        onPressed: () {
+                          _formKey.currentState?.save();
+                          if (_formKey.currentState!.validate()) {
+                            controller.creatAccountwithEmailAndPassword();
+                          }
+                        }),
                   ),
-                  CustomElevatedButton(
-                      inputText: "Submit",
-                      onPressed: () {
-                        _formKey.currentState?.save();
-                        if (_formKey.currentState!.validate()) {
-                          controller.creatAccountwithEmailAndPassword();
-                        }
-                      }),
                   CustomTextButton(
                       inputText: "Signup as an Admin",
                       onPressed: () {
