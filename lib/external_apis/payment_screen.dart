@@ -3,6 +3,7 @@ import 'package:e7gzly/view-models/profile_view_model.dart';
 import 'package:e7gzly/view-models/home_view_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e7gzly/views/home_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -123,6 +124,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntent = null;
+        Get.offAll(HomePage());
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
       });
