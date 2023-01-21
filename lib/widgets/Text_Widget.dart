@@ -57,10 +57,10 @@ class CustomPasswordTextField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(width: 3, color: Color.fromARGB(255, 255, 193, 7)),
+              BorderSide(width: 3, color: Color.fromARGB(221, 199, 218, 66)),
         ),
         filled: true,
-        fillColor: Color.fromARGB(255, 243, 236, 236),
+        fillColor: Color.fromARGB(255, 230, 225, 225),
       ),
       obscureText: isPasswordTextField,
       onChanged: (String value) {},
@@ -102,7 +102,7 @@ class CustomTextField extends StatelessWidget {
         prefixIcon: prefixIcon,
         enabledBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(width: 3, color: Color.fromARGB(255, 255, 193, 7)),
+              BorderSide(width: 3.5, color: Color.fromARGB(221, 199, 218, 66)),
         ),
         filled: true,
         fillColor: Color.fromARGB(255, 243, 236, 236),

@@ -68,14 +68,14 @@ class CustomElevatedButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        //<-- SEE HERE
-        backgroundColor: Colors.amber,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        backgroundColor: Color.fromARGB(221, 199, 218, 66),
         side: BorderSide(
           width: 3.0,
-          color: Colors.amber,
+          //color: Color.fromARGB(221, 250, 249, 249),
         ),
       ),
-      child: Text(inputText),
+      child: Text(inputText, style: TextStyle(fontSize: 17)),
     );
   }
 }
