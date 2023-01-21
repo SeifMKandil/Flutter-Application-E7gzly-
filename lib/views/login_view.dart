@@ -30,9 +30,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                 children: [
                   // if (!isKeyboard) Image.asset('assets/images/logo.png'),
                   Image.asset('assets/logo.png'),
-                  SizedBox(
-                    height: 30,
-                  ),
+
                   CustomTextField(
                     labelText: "Email",
                     keyboardType: TextInputType.name,
@@ -50,7 +48,7 @@ class LoginView extends GetWidget<AuthViewModel> {
                   ),
 
                   SizedBox(
-                    height: 30,
+                    height: 25,
                   ),
                   CustomPasswordTextField(
                     labelText: "Password",
@@ -69,33 +67,17 @@ class LoginView extends GetWidget<AuthViewModel> {
                   SizedBox(
                     height: 20,
                   ),
-                  CustomElevatedButton(
-                      inputText: "Login",
-                      onPressed: () {
-                        _formKey.currentState?.save();
+                  Container(
+                    width: 220,
+                    height: 40,
+                    child: CustomElevatedButton(
+                        inputText: "Login",
+                        onPressed: () {
+                          _formKey.currentState?.save();
 
-                        controller.signInwithEmailAndPassword();
-                      }),
-                  CustomTextButton(
-                      onPressed: () {}, inputText: "Forgot your password?"),
-                  const Text(
-                    'Do not have an account?',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      decoration: TextDecoration.underline, // <-- SEE HERE
-                    ),
+                          controller.signInwithEmailAndPassword();
+                        }),
                   ),
-                  CustomTextButton(
-                      onPressed: () {
-                        Get.to(OwnerLogin());
-                      },
-                      inputText: "Login As Owner"),
-                  CustomTextButton(
-                      onPressed: () {
-                        Get.to(RegisterView());
-                      },
-                      inputText: "Click here to Signup"),
 
                   SignInButton(
                     Buttons.Google,
@@ -104,12 +86,26 @@ class LoginView extends GetWidget<AuthViewModel> {
                       controller.googleSignInMethod();
                     },
                   ),
-
-                  SignInButton(
-                    Buttons.Facebook,
-                    text: "Sign up with Facebook",
-                    onPressed: () {},
+                  CustomTextButton(
+                      onPressed: () {}, inputText: "Forgot your password?"),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(RegisterView());
+                    },
+                    child: const Text(
+                      'Do not have an account?',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        decoration: TextDecoration.underline, // <-- SEE HERE
+                      ),
+                    ),
                   ),
+                  CustomTextButton(
+                      onPressed: () {
+                        Get.to(OwnerLogin());
+                      },
+                      inputText: "Login As Owner"),
                 ],
               ),
             ),
