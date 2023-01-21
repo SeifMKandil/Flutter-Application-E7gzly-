@@ -3,7 +3,6 @@ import 'package:e7gzly/view-models/profile_view_model.dart';
 import 'package:e7gzly/view-models/home_view_model.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e7gzly/views/home_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -36,27 +35,33 @@ class _PaymentScreenState extends State<PaymentScreen> {
             backgroundColor: const Color(0xFF212121),
             title: Text("Payment and Details"),
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                "Field: " + Get.arguments['location'].toString(),
-                style: TextStyle(
-                    fontSize: 30,
-                    fontStyle: FontStyle.italic,
-                    color: Colors.white),
-              ),
-              SizedBox(height: 10),
-              Text(
-                "Time Slot: " + Get.arguments['time'],
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-              SizedBox(height: 10),
-              Text(
-                "Price: " + Get.arguments['price'] + " EGP",
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              ),
-            ],
+          body: Container(
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.2, 0, 0, 0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Field : \n" +
+                      "\t\t\t" +
+                      Get.arguments['location'].toString(),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                Text(
+                  "Time Slot : \n" + "\t\t\t" + Get.arguments['time'],
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+                Text(
+                  "Price : \n" + "\t\t\t" + Get.arguments['price'] + " EGP",
+                  style: TextStyle(fontSize: 24, color: Colors.white),
+                ),
+              ],
+            ),
           ),
           bottomNavigationBar: Container(
             color: Colors.green,
@@ -67,8 +72,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
               child: Text("Pay Now!"),
               onPressed: () async {
                 await makePayment();
-                await createReservation(profileController.userModel.email!, Get.arguments['day'].toString(),
-                    Get.arguments['time'].toString(), fieldController.getFieldDetails().location!);
+                await createReservation(
+                    profileController.userModel.email!,
+                    Get.arguments['day'].toString(),
+                    Get.arguments['time'].toString(),
+                    fieldController.getFieldDetails().location!);
               },
             ),
           ),
@@ -80,14 +88,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
   Future<void> makePayment() async {
     try {
       paymentIntent =
-      await createPaymentIntent(Get.arguments['price'].toString(), 'EGP');
+          await createPaymentIntent(Get.arguments['price'].toString(), 'EGP');
       //Payment Sheet
       await Stripe.instance
           .initPaymentSheet(
-          paymentSheetParameters: SetupPaymentSheetParameters(
-              paymentIntentClientSecret: paymentIntent!['client_secret'],
-              style: ThemeMode.dark,
-              merchantDisplayName: 'Adnan'))
+              paymentSheetParameters: SetupPaymentSheetParameters(
+                  paymentIntentClientSecret: paymentIntent!['client_secret'],
+                  style: ThemeMode.dark,
+                  merchantDisplayName: 'Adnan'))
           .then((value) {});
 
       ///now finally display payment sheeet
@@ -99,7 +107,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   displayPaymentSheet() async {
     try {
-
       await Stripe.instance.presentPaymentSheet().then((value) {
         showNotification();
         showDialog(
@@ -124,18 +131,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
         // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
 
         paymentIntent = null;
-        Get.offAll(HomePage());
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');
       });
-
     } on StripeException catch (e) {
       print('Error is:---> $e');
       showDialog(
           context: context,
           builder: (_) => const AlertDialog(
-            content: Text("Cancelled "),
-          ));
+                content: Text("Cancelled "),
+              ));
     } catch (e) {
       print('$e');
     }
@@ -143,7 +148,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   //  Future<Map<String, dynamic>>
   createPaymentIntent(String amount, String currency) async {
-
     try {
       Map<String, dynamic> body = {
         'amount': calculateAmount(amount),
@@ -163,8 +167,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
       print('Payment Intent Body->>> ${response.body.toString()}');
 
       return jsonDecode(response.body);
-
-
     } catch (err) {
       // ignore: avoid_print
       print('err charging user: ${err.toString()}');
@@ -179,7 +181,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   createReservation(
       String reservedBy, String day, String time, String fieldName) async {
     final docReservation =
-    FirebaseFirestore.instance.collection("Reservations").doc();
+        FirebaseFirestore.instance.collection("Reservations").doc();
 
     final json = {
       'timeSlot': time,
@@ -191,27 +193,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
     await docReservation.set(json);
   }
 
-  void showNotification(){
+  void showNotification() {
     flutterLocalNotificationsPlugin.show(
         0,
         '',
         'Your reservation has been placed!',
         NotificationDetails(
-            android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
+            android: AndroidNotificationDetails(channel.id, channel.name,
                 importance: Importance.high,
                 color: Colors.blue,
                 playSound: true,
-                icon: 'mipmap/ic_launcher'
-            )
-        )
-
-    );
+                icon: 'mipmap/ic_launcher')));
   }
-
-
-
-
-
 }
