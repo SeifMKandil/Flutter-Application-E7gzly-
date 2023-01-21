@@ -55,7 +55,6 @@ dependencies:
   http:
   firebase_storage: ^11.0.10
   image_picker: ^0.8.6
-  firebase_core: ^2.4.1
   permission_handler: ^10.2.0
 
   
@@ -69,7 +68,10 @@ dev_dependencies:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/app_logo.png"
+  image_path: "assets/logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/newlogo.png"
+
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
