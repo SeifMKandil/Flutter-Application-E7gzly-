@@ -1,6 +1,7 @@
 # e7gzly
 
 A Flutter project. For sports courts registration.
+This Application is developed using MVVM architecture, GetX, Firebase  and Flutter 
 
 ## Getting Started
 
